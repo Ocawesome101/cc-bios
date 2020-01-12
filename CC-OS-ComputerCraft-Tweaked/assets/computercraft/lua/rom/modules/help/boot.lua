@@ -2,6 +2,7 @@
 
 local oses = {"oc-cc-kernel", "CC-OS"}
 local users = {"ocawesome101", "ocawesome101"} -- Could potentially add others later, if anyone actually develops for this thing lol
+local instCodes = {"NVDXKaZF", nil}
 
 local function menu(tItems)
     local selected = 1
@@ -44,9 +45,15 @@ while true do
         if advanceditem == 1 then
             local data = http.get("https://pastebin.com/raw/s3baJBuq")
             local exec = loadstring(data.readAll())
-            local choice = menu({"OC-CC-Kernel (Recommended, stable)", "CC-OS (Heavily WIP)"})
-            exec(users[choice], oses[choice])
             data.close()
+            local choice = menu({"OC-CC-Kernel (Recommended, stable)","OC-CC-Kernel (Root only)" , "CC-OS (Heavily WIP)"})
+            if choice == 1 then
+              local data = http.get("https://pastebin.com/raw/NVDXKaZF")
+              local exec = loadstring(data.readAll())
+              data.close()
+              exec()
+            end
+            exec(users[choice], oses[choice+1])
         end
     end
 end
