@@ -252,7 +252,7 @@ end
 
 -- Install lua parts of the os api
 function os.version()
-    return "CC-BIOS 0.7.3"
+    return "CC-BIOS 0.8.1"
 end
 
 function os.pullEventRaw( sFilter )
@@ -985,18 +985,10 @@ local function chk_boot()
     end
 
     if #tBoot < 1 then
-        printError("No bootable mediums found.")
-    
-        os.sleep(1)
-    
-        print("Press any key to rescan.")
-    
-        os.pullEventRaw("char")
-    
-        chk_boot()
-    else
-        return tBoot
+        printError("No bootable media found-- booting into help menu")
+        table.insert(tBoot, "/rom/modules/help/")
     end
+    return tBoot
 end
 
 local function boot(path)
