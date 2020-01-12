@@ -1,6 +1,7 @@
 -- Simple help system --
 
-local oses = {"oc-cc-kernel", "cc-os"}
+local oses = {"oc-cc-kernel", "CC-OS"}
+local users = {"ocawesome101", "ocawesome101"} -- Could potentially add others later, if anyone actually develops for this thing lol
 
 local function menu(tItems)
     local selected = 1
@@ -43,7 +44,8 @@ while true do
         if advanceditem == 1 then
             local data = http.get("https://pastebin.com/raw/s3baJBuq")
             local exec = loadstring(data.readAll())
-            exec("Ocawesome101", oses[menu({"OC-CC-Kernel (Recommended, stable)", "CC-OS (Heavily WIP)"})])
+            local choice = menu({"OC-CC-Kernel (Recommended, stable)", "CC-OS (Heavily WIP)"})
+            exec(users[choice], oses[choice])
             data.close()
         end
     end
